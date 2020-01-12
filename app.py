@@ -5,22 +5,26 @@ from psycopg2 import sql
 from flask_wtf import FlaskForm
 from wtforms import SelectField, StringField
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Table, Column, String, MetaData, Integer
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
-app.config['SQLALCHEMY_DATABASE_URL'] = 'postgres://postgres:admin@localhost:5432/hospital_med'
+db_string = "postgres://postgres:admin@localhost:5432/hospital_med"
+db = create_engine(db_string)
+meta = MetaData(db)
 
-db = SQLAlchemy(app)
+drugs_table = Table('Inventory', meta,
+                    Column('name', String),
+                    Column('country', String))
+actions_table = Table('actions',meta,
+                      Column('id', Integer, primary_key=True),
+                      Column('act_type',String))
 
 
-class Hospital(db.Model):
-    __tablename__ = 'example'
-    hospital_id = db.Column('hospital_id', db.Integer, primary_key=True)
-
-
-class Form(FlaskForm):
-            hospital = StringField('username')
-
+# with db.connect() as conn:
+# insert_statement = drugs_table.insert().values(name="Нурофен2", country="Україна")
+# conn.execute(insert_statement)
 
 # def Sql_get_data():
 #     with closing(psycopg2.connect(dbname='hospital_med', user='postgres',
@@ -36,32 +40,77 @@ class Form(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
-    form = Form()
-    return render_template('Login.html', form=form)
+    return render_template('Login.html')
 
 
-@app.route('/login', methods=['POST'])
-def login():
+@app.route('/add_data', methods=['GET', 'POST'])
+def add_data():
+    items = []
+    items_action = []
     if request.method == 'POST':
-        name = request.form['username']
-        date_pord = request.form['date_pord']
-        date_expiration = request.form['date_expiration']
-        sql_add_data(name, date_pord, date_expiration)
-    return render_template('index.html')
+        name = request.form['name']
+        country = request.form['country']
+        sql_add_data(name, country)
+    items = get_data_database_drugs()
+    items_action = get_data_unit()
+
+    return render_template('add_data.html', items=items, items_action=items_action)
 
 
-def sql_add_data(name, pord_date, expiration_date):
+def get_data_unit():
+    items_action = []
     with closing(psycopg2.connect(dbname='hospital_med', user='postgres',
                                   password='admin', host='localhost')) as conn:
         with conn.cursor() as cursor:
             conn.autocommit = True
-            values = [(name, pord_date, expiration_date), ]
-            insert = sql.SQL('insert into medicine (name,production_date,expiration_date) values {}').format(
+            cursor.execute('SELECT units_type FROM conditional'
+                           '_units')
+            for row in cursor:
+                items_action.append(str(row)[2:-3])
+                print(row)
+    return items_action
+
+
+def get_data_database_drugs ():
+    items = []
+    with closing(psycopg2.connect(dbname='hospital_med', user='postgres',
+                                  password='admin', host='localhost')) as conn:
+        with conn.cursor() as cursor:
+            conn.autocommit = True
+            cursor.execute('SELECT name FROM Inventory')
+            for row in cursor:
+                items.append(str(row)[2:-3])
+    cursor.close()
+    return items
+
+@app.route('/userpanel')
+def user_panel():
+    return render_template('userPanel.html')
+
+
+def sql_add_data(name, country):
+    with closing(psycopg2.connect(dbname='hospital_med', user='postgres',
+                                  password='admin', host='localhost')) as conn:
+        with conn.cursor() as cursor:
+            conn.autocommit = True
+            values = [(name, country), ]
+            insert = sql.SQL('insert into Inventory (name,country) values {}').format(
                 sql.SQL(',').join(map(sql.Literal, values)))
             cursor.execute(insert)
-            cursor.execute('SELECT * FROM medicine LIMIT 5')
+            cursor.execute('SELECT * FROM Inventory LIMIT 5')
             for row in cursor:
                 print(row)
+
+
+def sql_get_data():
+    with closing(psycopg2.connect(dbname='hospital_med', user='postgres',
+                                  password='admin', host='localhost')) as conn:
+        with conn.cursor() as cursor:
+            conn.autocommit = True
+            items = cursor.execute('SELECT * FROM Inventory LIMIT 5')
+            for row in cursor:
+                print(row)
+    return items
 
 
 if __name__ == '__main__':
