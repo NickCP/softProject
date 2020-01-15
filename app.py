@@ -57,6 +57,11 @@ def add_data():
     return render_template('add_data.html', items=items, items_action=items_action)
 
 
+@app.route('/userpanel')
+def user_panel():
+    return render_template('userPanel.html')
+
+
 def get_data_unit():
     items_action = []
     with closing(psycopg2.connect(dbname='hospital_med', user='postgres',
@@ -82,10 +87,6 @@ def get_data_database_drugs ():
                 items.append(str(row)[2:-3])
     cursor.close()
     return items
-
-@app.route('/userpanel')
-def user_panel():
-    return render_template('userPanel.html')
 
 
 def sql_add_data(name, country):
