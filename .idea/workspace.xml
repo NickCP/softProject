@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be58c77-0e83-45f2-8aab-024b3ad41063" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,27 +109,6 @@
         <option value="CSS File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>r</find>
-      <find>visi</find>
-      <find>medi</find>
-      <find>drugs</find>
-      <find>invento</find>
-      <find>inve</find>
-      <find>this</find>
-      <find>GET</find>
-      <find>bord</find>
-      <find>text</find>
-      <find>vert</find>
-      <find>padding-le</find>
-      <find>hover</find>
-      <find>grad</find>
-      <find>border</find>
-      <find>inline</find>
-      <find>fi</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -261,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565174840608</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Bugs">
+      <created>1579078022178</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1579078022178</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -291,6 +274,10 @@
       <screen x="0" y="40" width="1536" height="824" />
     </state>
     <state x="223" y="108" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.40.1536.824@0.40.1536.824" timestamp="1579039990445" />
+    <state x="424" y="48" key="CommitChangelistDialog2" timestamp="1579078021112">
+      <screen x="0" y="40" width="1536" height="824" />
+    </state>
+    <state x="424" y="48" key="CommitChangelistDialog2/0.40.1536.824@0.40.1536.824" timestamp="1579078021112" />
     <state x="503" y="215" key="EnvironmentVariablesDialog" timestamp="1579039540988">
       <screen x="0" y="40" width="1536" height="824" />
     </state>
