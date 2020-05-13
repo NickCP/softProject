@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запис на склад</title>
+     <link rel="stylesheet" href="static/css/addstyle.css">
+    <style>
+</style>
+</head>
+<body>
+<div class="top"><h1>Медичний інвертар</h1></div>
+<div class="body_c">
+<div class="left_box">
+    <form  method="post" action="add_data">
+        <input type="text" name="num" placeholder="Номер накладної" value=""/><br>
+        <input type="text" name="producer" placeholder="Виробник" value=""/><br>
+        <input  type="number" placeholder="Прихід в упаковках" name="box_number" value=""/><br>
+        <input  type="text" placeholder="Ціна за товар" name="price" value=""/>
+
+</div>
+
+<div class="right_box">
+    Препарат:
+    <select name="name_med" id="table_data">
+        {% for item in items %}
+            <option  value="{{item}}">{{ item }}</option>
+        {% endfor %}
+    </select><br>
+    Одиниці вимірювання:
+     <select name="units" id="table_data">
+        {% for item in items_action %}
+            <option  value="{{item}}">{{ item }}</option>
+        {% endfor %}
+    </select>
+<br><br>
+    Дата приходу:<input id="datePicker" type="date" name="date" value=""/><br><br>
+    Термін придатності:<input  type="date" name="expiration_date" value=""/>
+</div>
+</div>
+<div class="bottom">
+<input type="Submit" value="+"><br>
+<a href="user_panel"><input type="button" value="НАЗАД"></a>
+    </form>
+</div>
+<script type="text/javascript">document.getElementById('datePicker').value = new Date().toDateInputValue();</script>
+</body>
+</html>

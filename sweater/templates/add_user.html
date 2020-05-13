@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавити користувача</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<div class="flashes">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+<body>
+    <form class="box" method = "post">
+        <input type="password" name="password" placeholder="Пароль">
+        <input type="password" name="password_retype" placeholder="Повторити пароль">
+    <input type="Submit" value="Добавити">
+    </form>
+</body>
+</html>
